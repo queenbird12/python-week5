@@ -1,0 +1,40 @@
+class Smartphone:
+    def __init__(self, brand, model, battery_life):
+        self.brand = brand
+        self.model = model
+        self.__battery_life = battery_life  # Encapsulated attribute (private)
+
+    def show_info(self):
+        print(f"Brand: {self.brand}, Model: {self.model}")
+
+    def use_battery(self, hours):
+        if hours <= self.__battery_life:
+            self.__battery_life -= hours
+            print(f"Used phone for {hours} hours. Battery life left: {self.__battery_life} hours.")
+        else:
+            print("Battery too low! Please charge.")
+
+    def charge(self):
+        self.__battery_life = 24
+        print("Phone fully charged.")
+
+    def get_battery_life(self):
+        return self.__battery_life
+
+
+class SmartphoneWithCamera(Smartphone):
+    def __init__(self, brand, model, battery_life, camera_megapixels):
+        super().__init__(brand, model, battery_life)
+        self.camera_megapixels = camera_megapixels
+
+    def take_photo(self):
+        print(f"Taking a photo with {self.camera_megapixels} MP camera.")
+
+
+# Example usage
+phone = SmartphoneWithCamera("Apple", "iPhone 13", 24, 12)
+phone.show_info()
+phone.take_photo()
+phone.use_battery(5)
+print(f"Battery life (accessed via method): {phone.get_battery_life()} hours")
+phone.charge()
